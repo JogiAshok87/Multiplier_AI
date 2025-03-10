@@ -1,0 +1,65 @@
+.ql-container{
+    border-radius:0px 0px 8px 8px;
+}
+
+.ql-toolbar {
+    background-color: #800080 !important; /* Purple Background */
+    border-radius: 8px 8px 0px 0px;
+  }
+
+.ql-editor {
+    border-radius: 0px 0px 8px 8px;
+}
+  
+  .ql-toolbar button,
+  .ql-toolbar .ql-picker-label {
+    color: white !important; /* White Text */
+  }
+  
+  .ql-toolbar .ql-stroke{
+    stroke: white !important;
+  }
+  .ql-toolbar .ql-fill{
+    fill:white !important;
+  }
+  .ql-toolbar .ql-picker-item {
+    color: white !important; /* Dropdown Item Text */
+  }
+  
+  .ql-toolbar button:hover,
+  .ql-toolbar .ql-active {
+    background-color: #6a006a !important; /* Darker Purple when Active */
+  }
+
+  .ql-editor p{
+    margin-bottom: 10px;
+  }
+
+  .ql-editor p:nth-child(5),
+  .ql-editor p:nth-child(6),
+  .ql-editor p:nth-child(6)
+  {
+    margin-bottom: 1px;
+  }
+  
+  .ql-editor ul{
+    margin-bottom: 5px;
+  }
+
+  .ql-toolbar .ql-picker-options {
+    background-color: #ffffff !important; /* White background for dropdown */
+    border: 1px solid #ccc !important; /* Add a border for better visibility */
+    color: #000000 !important; /* Black text color for dropdown options */
+  }
+  
+  .ql-toolbar .ql-picker-item.ql-selected {
+    color: #800080 !important; /* Purple text for selected item */
+    background-color: #f0f0f0 !important; /* Light gray background for selected item */
+  }
+  
+  .ql-toolbar .ql-picker-item {
+    color: #800080 !important; /* Purple text on hover */
+    background-color: #f0f0f0 !important; /* Light gray background on hover */
+  }
+  
+ 

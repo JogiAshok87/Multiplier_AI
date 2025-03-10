@@ -1,0 +1,16 @@
+venv/
+.env
+config.py
+instance/
+*.db
+*.bson
+*.wt
+/data/db/
+*.log
+__pycache__/
+*.pyc
+*.swp
+*.DS_Store
+uploads/
+.vscode/
+.idea/
