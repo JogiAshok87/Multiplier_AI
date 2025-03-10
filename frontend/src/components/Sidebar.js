@@ -65,7 +65,7 @@ export default function Header() {
             </button>
             {isReportsOpen && (
               <ul className="pl-6 mt-2">
-                <li><a href="#" className="block py-1 hover:text-purple-400">Performance</a></li>
+                <li><Link to="/dashboard" className="block py-1 hover:text-purple-400">Performance</Link></li>
                 <li><a href="#" className="block py-1 hover:text-purple-400">Delivery Reports</a></li>
               </ul>
             )}

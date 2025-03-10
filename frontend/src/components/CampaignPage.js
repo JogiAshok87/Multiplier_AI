@@ -113,7 +113,7 @@ export default function CampaignPage() {
         <form className="space-y-6 flex-grow mt-10"  onSubmit={formSubmitHandler}>
           <div className="border py-8 px-6 rounded-lg shadow-md">
             <h2 className="font-semibold text-[#800080]">
-              Step 1 of 3: Define the campaign
+              Step 1 of 2: Define the campaign
             </h2>
             <input
               type="text"
@@ -128,9 +128,9 @@ export default function CampaignPage() {
 
           <div className="border py-8 px-6 rounded-lg shadow-md">
             <h2 className="font-semibold text-[#800080]">
-              Step 2 of 3: Define content source
+              Step 2 of 2: Define content source
             </h2>
-            <input
+            <textarea
               type="text"
               name="campaignContent"
               placeholder="Enter content source"
@@ -138,10 +138,12 @@ export default function CampaignPage() {
               value = {campaignData.campaignContent || ""}
               onChange={changeHandler}
               required
+              rows={8}
             />
+
           </div>
 
-         <div className="border p-4 rounded-lg shadow-md">
+         {/* <div className="border p-4 rounded-lg shadow-md">
             <h2 className="font-semibold text-[#800080]">
               Step 3 of 3: Upload data source
             </h2>
@@ -166,15 +168,16 @@ export default function CampaignPage() {
                 onChange={handleFileChange}
               />
           </label>
-          </div>
-          <div>
+          </div> */}
+          <div className="flex justify-between pt-8">
             <button type="submit" className="px-4 py-2 bg-slate-50 border border-blue-500 rounded-md hover:bg-blue-500 hover:text-white">Save</button>
+            <Link to="/HCPDashboard"><button className=" bg-[#800080] text-white px-4 py-2 rounded-md w-50px">Select HCP</button></Link>
           </div>
         </form>
 
         {/* Pagination and Action Button at Bottom */}
         <div className="mt-6 flex justify-end">
-          <Link to="/HCPDashboard"><button className="mt-6 bg-[#800080] text-white px-4 py-2 rounded-md w-50px">Select HCP</button></Link>
+          
         </div>
 
         
