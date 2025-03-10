@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { storeContext } from '../ContextAPI'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 export default function Login() {
@@ -19,22 +21,38 @@ export default function Login() {
         password: password,
       });
       if(response.status === 200){
-        alert("Login Successfull!");
+        // alert("Login Successfull!");
+
+        toast.success("User Loggined Successfully!", {
+          position: "top-right",
+          style:{
+            color:"black"
+          }
+        });
+
         console.log("Token:",response.data.token);
         localStorage.setItem("authToken",response.data.token);
         login(response.data.token)
-        navigate("/campaignPage")
+        setTimeout(()=>{
+          navigate("/campaignPage")
+        },3000)
       }else{
         navigate("/login")
       }
     }catch(error){
       console.error("Login error:",error.response?.data || error.message);
-      alert(error.response?.data?.message || "Login failed! Please try again")
+      toast.error(error.response?.data?.message || "Login failed! Please try again",{
+        position: "top-right",
+        style:{
+          color:"black"
+        }
+      })
     }
   };
 
   return (
     <div className="flex  justify-center min-h-screen  bg-gray-100">
+      <ToastContainer />
       <div className="w-1/2 flex flex-col mt-8">
          < img src="/multiplier_logo.png" alt="" className="w-64"/>
          

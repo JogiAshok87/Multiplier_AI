@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import Sidebar from "./Sidebar"
 import ProgressBar from "./ProgressBar";
 import axios from "axios"
+import Header from './Header'
 
 const doctors = [
   { name: "Dr. John Doe", speciality: "Cardiologist", location: "New York, USA", experience: 15, status: "Unique" },
@@ -89,7 +90,7 @@ export default function HCPDashboard() {
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <header className="flex justify-between items-center mb-6">
+        {/* <header className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">Welcome, Marc</h1>
           <div className="flex gap-10">
           <input type="text" placeholder="Search here" className="border rounded px-3 py-2 text-sm" />
@@ -103,8 +104,8 @@ export default function HCPDashboard() {
                         <FaAngleDown />
                       </div>
                       </div>
-        </header>
-
+        </header> */}
+        <Header />
         <ProgressBar />
 
         {/* HCP Data Import */}

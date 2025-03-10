@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar";
 import { storeContext } from "../ContextAPI";
 import { FaAngleDown } from "react-icons/fa6";
+import Header from './Header'
 
 export default function ContentReview() {
   
@@ -79,7 +80,7 @@ const formattedEmail = emailTemplate(subject, body);
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <header className="flex justify-between items-center mb-6">
+        {/* <header className="flex justify-between items-center mb-6">
           <h1 className="text-xl font-semibold">Welcome, Marc</h1>
           <div className="relative flex gap-10">
             <input
@@ -97,8 +98,8 @@ const formattedEmail = emailTemplate(subject, body);
             </div>
             
           </div>
-        </header>
-
+        </header> */}
+        <Header />
         <ProgressBar />
 
         {/* Content Review */}

@@ -4,6 +4,7 @@ import { Search, ChevronDown } from "lucide-react";
 import { FaAngleDown } from "react-icons/fa6";
 import Sidebar from "./Sidebar"
 import ProgressBar from "./ProgressBar";
+import Header from './Header'
 
 const cohorts = [
   { title: "Experienced Cardiologists", total: 50, reason: "Highly skilled professionals with established credibility and patient trust" },
@@ -37,7 +38,7 @@ export default function CohortSelection() {
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <header className="flex justify-between items-center mb-6">
+        {/* <header className="flex justify-between items-center mb-6">
           <h1 className="text-xl font-semibold">Welcome, Marc</h1>
           <div className="flex items-center space-x-4">
             <div className="relative">
@@ -58,10 +59,11 @@ export default function CohortSelection() {
               </div>
               <FaAngleDown />
             </div>
-            {/* <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs">MJ</span> */}
+            
 
           </div>
-        </header>
+        </header> */}
+        <Header />
 
         <ProgressBar />
 

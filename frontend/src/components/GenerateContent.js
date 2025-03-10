@@ -5,6 +5,7 @@ import { Link ,useLocation} from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa6";
 import { UploadCloud} from "lucide-react";
 import axios from 'axios'
+import Header from './Header'
 
 import { storeContext } from "../ContextAPI";
 
@@ -149,7 +150,7 @@ export default function GenerateContent() {
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <header className="flex justify-between items-center mb-6">
+        {/* <header className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">Welcome, Marc</h1>
           <div className="flex gap-10">
           <div className="relative">
@@ -168,7 +169,8 @@ export default function GenerateContent() {
               <FaAngleDown />
             </div>
             </div>
-        </header>
+        </header> */}
+        <Header />
 
         <ProgressBar />
 

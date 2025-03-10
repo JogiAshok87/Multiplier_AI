@@ -20,7 +20,7 @@ const Header = () => {
     
   return (
     
-        <div className="flex justify-between items-center mb-6 sticky top-0 bg-slate-100 py-2 w-full">
+        <div className="flex justify-between items-center mb-10  py-2 w-full">
                   <h1 className="text-xl font-semibold">Welcome, Marc</h1>
                   <div className="relative flex gap-10">
                     <input
@@ -41,7 +41,7 @@ const Header = () => {
                     </div>
                     {/*Dropdown Menu */}
                     {isOpen && (
-                      <div className="absolute top-full right-0 bg-[#fff] rounded-lg shadow-lg w-[150px] p-10 text-center">
+                      <div className="absolute top-full right-0 bg-[#fff] rounded-lg shadow-lg w-[150px] p-10 text-center z-50">
                             <button className="w-full bg-red-500 text-white border-0 py-2 px-3 rounded cursor-pointer hover:bg-[#cc0000]" onClick={handleLogout}>Logout</button>
                       </div>
         

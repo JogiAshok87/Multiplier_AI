@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route,Navigate } from "react-router-dom";
-// import ProgressBar from "./components/ProgressBar"; // Import ProgressBar
 import CampaignPage from "./components/CampaignPage";
 import Dashboard from "./components/Dashboard";
 import HCPDashboard from "./components/HCPDashboard";

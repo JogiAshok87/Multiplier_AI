@@ -1,11 +1,13 @@
 import { useState} from "react";
 import {Link} from 'react-router-dom'
 // import { ChevronLeft, ChevronRight } from "lucide-react";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown,FaAngleUp } from "react-icons/fa6";
+// import { FaAngleDown } from "react-icons/fa6";
 import { UploadCloud} from "lucide-react";
 import axios from 'axios'
 import Sidebar from "./Sidebar";
 import ProgressBar from "./ProgressBar";
+import Header from "./Header";
 
 
 export default function CampaignPage() {
@@ -16,6 +18,8 @@ export default function CampaignPage() {
     campaignContent: "",
     campaignFile: null,
   });
+
+
 
   const changeHandler = (e) =>{
     setCampaignData({...campaignData, [e.target.name]:e.target.value})
@@ -80,7 +84,7 @@ export default function CampaignPage() {
 
       {/* Main Content */}
       <main className="flex-1 p-8 flex flex-col">
-        <header className="flex justify-between items-center mb-6">
+        {/* <header className="flex justify-between items-center mb-6">
           <h1 className="text-lg font-semibold">Welcome, Marc</h1>
           <div className="flex items-center space-x-4">
             <input
@@ -99,7 +103,8 @@ export default function CampaignPage() {
               <FaAngleDown />
             </div>
           </div>
-        </header>
+        </header> */}
+        <Header />
         <ProgressBar />
 
         

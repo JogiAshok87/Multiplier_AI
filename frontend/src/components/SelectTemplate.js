@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar"
 import { FaAngleDown } from "react-icons/fa6";
 import ProgressBar from "./ProgressBar";
+import Header from "./Header";
 
 export default function SelectTemplate() {
   const [search, setSearch] = useState("");
@@ -31,7 +32,7 @@ export default function SelectTemplate() {
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <header className="flex justify-between items-center mb-6">
+        {/* <header className="flex justify-between items-center mb-6">
           <h1 className="text-xl font-semibold">Welcome, Marc</h1>
           <div className="relative flex gap-10">
             <input
@@ -49,7 +50,8 @@ export default function SelectTemplate() {
             </div>
           
           </div>
-        </header>
+        </header> */}
+        <Header />
 
         <ProgressBar />
 
