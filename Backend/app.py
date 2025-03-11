@@ -114,36 +114,13 @@ def campaign():
         return jsonify({"error":str(e)}),500
     
 # Reference to doctors collection
-doctorsList_collection = mongo.db.registeredDoctors
+doctorsList_collection = mongo.db.HCPData
 
-@app.route("/registeredDoctors", methods=['GET','POST'])
-def registeredDoctors():
-    if request.method == "POST":
+@app.route("/HCPData", methods=['GET','POST'])
+def HCPData():
+    if request.method == "GET":
         try:
-            doctors_data = request.json
-            doctor_name = doctors_data.get("name")
-            specialtity = doctors_data.get("speciality")
-            location = doctors_data.get("location")
-            experience = doctors_data.get("experience")
-            status = doctors_data.get("status")
-            
-            registeredDoctorId = doctorsList_collection.insert_one({
-                "doctor_Name":doctor_name,
-                "speciality":specialtity,
-                "location":location,
-                "experience":experience,
-                "status":status
-            }).inserted_id
-            
-            return jsonify({"message":"Doctor Registered successfully!","id":str(registeredDoctorId)}),200
-            
-            
-        except Exception as e:
-            return jsonify({"error":str(e)}),500
-    
-    elif request.method == "GET":
-        try:
-            doctors = list(doctorsList_collection.find({}, {"_id": 0})) #gets all documents from the collection
+            doctors = list(doctorsList_collection.find({}, {"_id": 0}).limit(100)) #gets all documents from the collection
             return jsonify(doctors), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
