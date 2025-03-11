@@ -7,6 +7,7 @@ import GenerateContent from "./components/GenerateContent";
 import SelectTemplate from "./components/SelectTemplate";
 import ContentReview from "./components/ContentReview";
 import Login from "./components/Login";
+import DoctorsProfilePage from "./components/DoctorsProfilePage";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
                 <Route path="/selectTemplate" element={<SelectTemplate />} />
                 <Route path="/contentReview" element={<ContentReview />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/doctorsProfilePage" element={<DoctorsProfilePage />}/>
               </Routes>
             </>
           }

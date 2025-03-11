@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from "react";
 import { UploadCloud, Search, ChevronDown } from "lucide-react";
 import { FaAngleDown } from "react-icons/fa6";
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import Sidebar from "./Sidebar"
 import ProgressBar from "./ProgressBar";
 import axios from "axios"
@@ -17,15 +17,37 @@ const doctors = [
   { name: "Dr. Michael Johnson", speciality: "Oncologist", location: "San Antonio, USA", experience: 9, status: "Unique" },
 ];
 
+const location = [
+  "California", "Ohio", "New Jersey", "Kansas", "Illinois", "Michigan", "Pennsylvania", 
+  "Indiana", "Louisiana", "Texas", "Indiana", "Maryland", "New Jersey", "Tennessee", 
+  "North Carolina", "Florida", "Colorado", "Washington", "Vermont", "Kentucky", 
+  "Minnesota", "Louisiana", "Mississippi", "Illinois", "Massachusetts", "Nebraska", 
+  "New York", "Maine", "South Carolina", "Georgia", "Wisconsin", "Oregon", "Montana", 
+  "Iowa", "New Mexico", "District of Columbia", "Missouri", "West Virginia", "Oklahoma", 
+  "Arizona", "Arkansas", "Virginia", "Nevada", "New Hampshire", "Connecticut", "Utah", 
+  "Rhode Island", "Puerto Rico", "Alabama", "Delaware"
+];
+
+const Sub_Speciality = [
+  "Epilepsy", "Anxiety Disorders", "Psoriasis", "Arrhythmia", "Heart Failure", 
+  "Cancer Prevention", "COPD", "Skin Cancer", "Thyroid Disorders", 
+  "Joint Replacement", "Sports Medicine", "Breast Cancer", "Asthma", 
+  "Diabetes Management", "Stroke Management", "Depression Treatment"
+];
+
+
 export default function HCPDashboard() {
+
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState([]);
   const [doctorsData,setDoctorsData] =useState([])
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     speciality: "",
+    sub_speciality:"",
     location: "",
     experience: "",
-    status: "",
+    Status: "",
   });
 
   const handleFileChange = (event) => {
@@ -37,10 +59,10 @@ export default function HCPDashboard() {
 
     const fetchData = async() =>{
       try{
-        const resposne = await axios.get("http://127.0.0.1:5000/registeredDoctors")
+        const resposne = await axios.get("http://127.0.0.1:5000/HCPData")
   
         if (resposne.status === 200){
-          // console.log("resposne from backend",resposne.data)
+          console.log("resposne from backend",resposne.data)
           setDoctorsData(resposne.data)
         }
   
@@ -59,6 +81,7 @@ export default function HCPDashboard() {
   const resetFilters = () => {
     setFilters({
       speciality: "",
+      sub_speciality:"",
       location: "",
       experience: "",
       status: "",
@@ -67,17 +90,29 @@ export default function HCPDashboard() {
   };
 
   const filteredDoctors = doctorsData.filter((doctor) => {
-    const experienceNumber = parseInt(doctor.experience)
+    const experienceNumber = parseInt(doctor.Experience,10) || 0
+    const statusLowerCase = doctor.Status ? doctor.Status.toLowerCase() : ""; // Handle undefined/null
+    const filterStatusLowerCase = filters.Status ? filters.Status.toLowerCase() : "";
+    const stateLowerCase = doctor.State_Name ? doctor.State_Name.toLowerCase() : ""; // Handle case insensitivity
+    const filterStateLowerCase = filters.location ? filters.location.toLowerCase() : "";
+    const subSpecialityLowerCase = doctor.sub_speciality ? doctor.sub_speciality.toLowerCase() : ""; // Handle case insensitivity
+    const filterSubSpecialityLowerCase = filters.sub_speciality ? filters.sub_speciality.toLowerCase() : "";
+
     return (
-      doctor.doctor_Name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      doctor.doctor_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (filters.speciality ? doctor.speciality === filters.speciality : true) &&
-      (filters.location ? doctor.location === filters.location : true) &&
-      (filters.experience ? experienceNumber >= parseInt(filters.experience) : true) &&
-      (filters.status ? doctor.status === filters.status : true)
+      (filters.sub_speciality ? subSpecialityLowerCase === filterSubSpecialityLowerCase : true) &&
+      (filters.location ? stateLowerCase === filterStateLowerCase : true) &&
+      (filters.experience ? experienceNumber >= parseInt(filters.experience, 10) : true) &&
+      (filters.Status ? statusLowerCase === filterStatusLowerCase : true) 
     );
+      
+    
   });
 
-  
+  const handleRowClick = (doctor) => {
+    navigate(`/doctorsProfilePage`, { state: { doctor } });
+  };
 
 
 
@@ -152,6 +187,16 @@ export default function HCPDashboard() {
             />
           </div>
 
+          {/*<select name="Paltform" onChange={handleFilterChange} value={filters.platform} className="border rounded-md p-1 cursor-pointer">
+            <option value="Paltform">Paltform</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Youtube">Youtube</option>
+            <option value="LinkedIN">LinkedIN</option>
+            
+          </select>*/}
+
           <select name="speciality" onChange={handleFilterChange} value={filters.speciality} className="border rounded-md p-1 cursor-pointer">
             <option value="">Speciality</option>
             <option value="Cardiologist">Cardiologist</option>
@@ -162,14 +207,33 @@ export default function HCPDashboard() {
             <option value="Gynecologist">Gynecologist</option>
             <option value="Oncologist">Oncologist</option>
           </select>
-          <select name="location" onChange={handleFilterChange} value={filters.location} className="border rounded-md p-1 cursor-pointer">
+          <select name="sub_speciality" onChange={handleFilterChange} value={filters.sub_speciality} className="border rounded-md p-1 cursor-pointer">
+            <option value="">Sub-Speciality</option>
+            {Sub_Speciality.map((speciality,index)=>(
+              <option key={index} value={speciality}>{speciality}</option>
+            ))}
+          </select>
+          {/* <select name="location" onChange={handleFilterChange} value={filters.location} className="border rounded-md p-1 cursor-pointer">
             <option value="">Location</option>
-            <option value="New York,USA">New York,USA</option>
-            <option value="Los Angeles,USA">Los Angeles,USA</option>
-            <option value="Chicago,USA">Chicago,USA</option>
-            <option value="Houston,USA">Houston,USA</option>
-            <option value="Phoenix,USA">Phoenix,USA</option>
-            <option value="San Antonio,USA">San Antonio,USA</option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select> */}
+          <select 
+            name="location" 
+            onChange={handleFilterChange} 
+            value={filters.location} 
+            className="border rounded-md p-1 cursor-pointer"
+          >
+            <option value="">Location</option>
+            {location.map((state, index) => (
+              <option key={index} value={state}>
+                {state}
+              </option>
+            ))}
           </select>
           <select name="experience" onChange={handleFilterChange} value={filters.experience} className="border rounded-md p-1 cursor-pointer">
             <option value="">Experience</option>
@@ -178,11 +242,11 @@ export default function HCPDashboard() {
             <option value="15">15+ years</option>
             <option value="20">20+ years</option>
           </select>
-          <select name="status" onChange={handleFilterChange} value={filters.status} className="border rounded-md p-1 cursor-pointer">
+          <select name="Status" onChange={handleFilterChange} value={filters.Status} className="border rounded-md p-1 cursor-pointer">
             <option value="">Status</option>
             <option value="Unique">Unique</option>
             <option value="Duplicate">Duplicate</option>
-            <option value="Preloaded">Preloaded</option>
+            <option value="Predefined">Predefined</option>
           </select>
 
           </div>
@@ -197,19 +261,26 @@ export default function HCPDashboard() {
             <tr className="border-b border-gray-300 bg-gray-100">
               <th className="text-left p-2">Doctor</th>
               <th className="text-left p-2">Speciality</th>
+              <th className="text-left p-2">Sub-Speciality</th>
               <th className="text-left p-2">Location</th>
+             
               <th className="text-left p-2">Experience</th>
               <th className="text-left p-2">Status</th>
             </tr>
           </thead>
           <tbody>
             {filteredDoctors.map((doctor, index) => (
-              <tr key={index} className="border-b border-gray-200">
-                <td className="p-2">{doctor.doctor_Name}</td>
+              <tr 
+              key={index} 
+              onClick={()=>handleRowClick(doctor)}
+              className="border-b border-gray-200 cursor-pointer">
+                <td className="p-2">{doctor.doctor_name}</td>
                 <td className="p-2">{doctor.speciality}</td>
-                <td className="p-2 text-[#800080]">{doctor.location}</td>
-                <td className="p-2">{doctor.experience}</td>
-                <td className="p-2">{doctor.status}</td>
+                <td className="p-2">{doctor.sub_speciality}</td>
+                <td className="p-2 text-[#800080]">{doctor.city}, {doctor.State_Name}</td>
+                
+                <td className="p-2">{doctor.Experience}</td>
+                <td className="p-2">{doctor.Status}</td>
               </tr>
             ))}
           </tbody>
