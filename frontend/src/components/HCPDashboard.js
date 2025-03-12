@@ -92,15 +92,33 @@ export default function HCPDashboard() {
     const filterStateLowerCase = filters.location ? filters.location.toLowerCase() : "";
     const subSpecialityLowerCase = doctor.sub_speciality ? doctor.sub_speciality.toLowerCase() : ""; // Handle case insensitivity
     const filterSubSpecialityLowerCase = filters.sub_speciality ? filters.sub_speciality.toLowerCase() : "";
+    const cityLowerCase = doctor.city ? doctor.city.toLowerCase() : "";
+
+    const matchesSearchTerm = searchTerm.toLowerCase();
 
     return (
-      doctor.doctor_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (
+        doctor.doctor_name.toLowerCase().includes(matchesSearchTerm) ||
+        doctor.speciality.toLowerCase().includes(matchesSearchTerm) ||
+        subSpecialityLowerCase.includes(matchesSearchTerm) ||
+        cityLowerCase.includes(matchesSearchTerm) ||
+        stateLowerCase.includes(matchesSearchTerm) ||
+        experienceNumber.toString().includes(matchesSearchTerm) || 
+        statusLowerCase.includes(matchesSearchTerm)
+      ) &&
       (filters.speciality ? doctor.speciality === filters.speciality : true) &&
       (filters.sub_speciality ? subSpecialityLowerCase === filterSubSpecialityLowerCase : true) &&
       (filters.location ? stateLowerCase === filterStateLowerCase : true) &&
       (filters.experience ? experienceNumber >= parseInt(filters.experience, 10) : true) &&
-      (filters.Status ? statusLowerCase === filterStatusLowerCase : true) 
-    );
+      (filters.Status ? statusLowerCase === filterStatusLowerCase : true)
+    )
+      // doctor.doctor_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      // (filters.speciality ? doctor.speciality === filters.speciality : true) &&
+      // (filters.sub_speciality ? subSpecialityLowerCase === filterSubSpecialityLowerCase : true) &&
+      // (filters.location ? stateLowerCase === filterStateLowerCase : true) &&
+      // (filters.experience ? experienceNumber >= parseInt(filters.experience, 10) : true) &&
+      // (filters.Status ? statusLowerCase === filterStatusLowerCase : true) 
+    
       
     
   });
@@ -204,21 +222,11 @@ export default function HCPDashboard() {
           <div className="flex space-x-2"> 
           <div className="relative  w-1/3 flex items-center">
             <Search className="absolute left-2 top-3 w-4 h-4 text-gray-500" />
-            <input type="search" placeholder="Search doctors" className="pl-8 w-full border rounded px-2 py-2" 
+            <input type="search" placeholder="Search..." className="pl-8 w-full border rounded px-2 py-2" 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
-          {/*<select name="Paltform" onChange={handleFilterChange} value={filters.platform} className="border rounded-md p-1 cursor-pointer">
-            <option value="Paltform">Paltform</option>
-            <option value="Instagram">Instagram</option>
-            <option value="Twitter">Twitter</option>
-            <option value="Facebook">Facebook</option>
-            <option value="Youtube">Youtube</option>
-            <option value="LinkedIN">LinkedIN</option>
-            
-          </select>*/}
 
           <select name="speciality" onChange={handleFilterChange} value={filters.speciality} className="border rounded-md p-1 cursor-pointer">
             <option value="">Speciality</option>
@@ -238,15 +246,7 @@ export default function HCPDashboard() {
               <option key={index} value={speciality}>{speciality}</option>
             ))}
           </select>
-          {/* <select name="location" onChange={handleFilterChange} value={filters.location} className="border rounded-md p-1 cursor-pointer">
-            <option value="">Location</option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-          </select> */}
+          
           <select 
             name="location" 
             onChange={handleFilterChange} 
