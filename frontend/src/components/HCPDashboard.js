@@ -6,16 +6,11 @@ import Sidebar from "./Sidebar"
 import ProgressBar from "./ProgressBar";
 import axios from "axios"
 import Header from './Header'
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
-const doctors = [
-  { name: "Dr. John Doe", speciality: "Cardiologist", location: "New York, USA", experience: 15, status: "Unique" },
-  { name: "Dr. Jane Smith", speciality: "Dermatologist", location: "Los Angeles, USA", experience: 10, status: "Duplicate" },
-  { name: "Dr. Mark Lee", speciality: "Orthopedic", location: "Chicago, USA", experience: 8, status: "Preloaded" },
-  { name: "Dr. Emily Davis", speciality: "Pediatrician", location: "Houston, USA", experience: 12, status: "Unique" },
-  { name: "Dr. Chris Brown", speciality: "Neurologist", location: "Phoenix, USA", experience: 20, status: "Duplicate" },
-  { name: "Dr. Sarah Wilson", speciality: "Gynecologist", location: "Philadelphia, USA", experience: 7, status: "Preloaded" },
-  { name: "Dr. Michael Johnson", speciality: "Oncologist", location: "San Antonio, USA", experience: 9, status: "Unique" },
-];
+
+
 
 const location = [
   "California", "Ohio", "New Jersey", "Kansas", "Illinois", "Michigan", "Pennsylvania", 
@@ -115,6 +110,34 @@ export default function HCPDashboard() {
   };
 
 
+  const handleExportToExcel = () => {
+    if (filteredDoctors.length === 0) {
+      alert("No data to export!");
+      return;
+    }
+  
+    // Convert data to worksheet
+    const ws = XLSX.utils.json_to_sheet(filteredDoctors.map(doctor => ({
+      Doctor: doctor.doctor_name,
+      Speciality: doctor.speciality,
+      "Sub-Speciality": doctor.sub_speciality,
+      Location: `${doctor.city}, ${doctor.State_Name}`,
+      Experience: doctor.Experience,
+      Status: doctor.Status,
+    })));
+  
+    // Create a workbook and append the worksheet
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Doctors");
+  
+    // Generate Excel file and trigger download
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8" });
+    saveAs(data, "Doctors_List.xlsx");
+  };
+  
+
+
 
 
 
@@ -201,11 +224,13 @@ export default function HCPDashboard() {
             <option value="">Speciality</option>
             <option value="Cardiologist">Cardiologist</option>
             <option value="Dermatologist">Dermatologist</option>
-            <option value="Orthopedic">Orthopedic</option>
-            <option value="Pediatrician">Pediatrician</option>
+            <option value="Gastroenterologist">Gastroenterologist</option>
             <option value="Neurologist">Neurologist</option>
-            <option value="Gynecologist">Gynecologist</option>
             <option value="Oncologist">Oncologist</option>
+            <option value="Endocrinologist">Endocrinologist</option>
+            <option value="Pulmonologist">Pulmonologist</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+
           </select>
           <select name="sub_speciality" onChange={handleFilterChange} value={filters.sub_speciality} className="border rounded-md p-1 cursor-pointer">
             <option value="">Sub-Speciality</option>
@@ -255,8 +280,9 @@ export default function HCPDashboard() {
           </div>
         </div>
 
+        <div className="overflow-y-scroll overflow-x-hidden max-h-[400px]">
         {/* Doctors Table */}
-        <table className="w-full border-collapse">
+         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-100">
               <th className="text-left p-2">Doctor</th>
@@ -268,7 +294,7 @@ export default function HCPDashboard() {
               <th className="text-left p-2">Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {filteredDoctors.map((doctor, index) => (
               <tr 
               key={index} 
@@ -284,10 +310,12 @@ export default function HCPDashboard() {
               </tr>
             ))}
           </tbody>
-        </table>
+         </table>
+        </div>
 
         {/* Create Cohort Button */}
-        <div className="flex justify-end mt-6">
+        <div className="flex justify-between mt-6">
+          <button className="bg-gray-500 px-4 py-2 rounded-lg cursor-pointer text-white" onClick={handleExportToExcel} >Export</button>
         <Link to="/cohortSelection"><button className="bg-[#800080] text-white px-4 py-2 rounded-md">Define Cohort</button></Link>
         </div>
       </main>

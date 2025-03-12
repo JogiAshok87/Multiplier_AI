@@ -18,12 +18,12 @@ const ProgressBar = () => {
 
   const stepNames = {
     "/campaignPage": "Define Campaign",
-    "/HCPDashboard": "HCP List",
+    "/HCPDashboard": "HCP Database",
     "/cohortSelection": "Define Cohort",
-    "/generateContent": "Content Generation",
-    "/selectTemplate": "Templates",
-    "/contentReview": "Content Review",
-    "/dashboard": "Dashboard"
+    "/generateContent": "Generate Content",
+    "/selectTemplate": "Define Template",
+    "/contentReview": "Review Content",
+    "/dashboard": "Analytics"
 
   }
 

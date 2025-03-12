@@ -45,7 +45,7 @@ const DoctorsProfilePage = () => {
         <div className='flex  gap-6 mb-10'>
         <div className='bg-[#800080] mt-10 p-14 w-2/6 rounded-tr-3xl rounded-br-3xl'>
 
-            <img src="doctorsProfile.png" className='rounded-xl'/>
+            <img src={doctor.img} className='rounded-xl'/>
             <h2 className='text-white text-xl pt-4'>{doctor.doctor_name}</h2>
             <p className='text-white pt-1'>{doctor.speciality}</p>
             <p className='text-white'>Breast cancer, Cancer prevention</p>
@@ -53,11 +53,11 @@ const DoctorsProfilePage = () => {
             <p className='text-white pt-5'>University of California, Irvine</p>
             <p className='text-white'>Irvine, CA</p>
             <div className='flex items-center gap-5 pt-10'>
-            <BsFacebook className='fill-white' size={30}/>
-            <FaInstagramSquare className='fill-white' size={30}/>
-            <IoLogoYoutube className='fill-white' size={30}/>
-            <GrTwitter className='fill-white' size={30}/>
-            <FaLinkedinIn className='fill-white' size={30}/>
+                <a href={doctor.facebook_link}><BsFacebook className='fill-white' size={30}/></a>
+                <a href={doctor.Insta_link}><FaInstagramSquare className='fill-white' size={30}/></a>
+                <a href={doctor.youtube_link}><IoLogoYoutube className='fill-white' size={30}/></a>
+                <a href={doctor.twitter_link}><GrTwitter className='fill-white' size={30}/></a>
+                <a href={doctor.linkiedin_link}><FaLinkedinIn className='fill-white' size={30}/></a>
             </div>
         </div>
         <div className='w-[calc(100%-100px)] mt-10 mr-5'>
@@ -66,7 +66,7 @@ const DoctorsProfilePage = () => {
                 <Pie
                     data={data}
                     cx={275}
-                    cy={120}
+                    cy={130}
                     labelLine={false}
                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
                     outerRadius={100}
@@ -128,7 +128,7 @@ const DoctorsProfilePage = () => {
                     <li>{doctor.peer2}</li>
                     <li>{doctor.peer3}</li>
                     <li>{doctor.peer4}</li>
-                    <li>{doctor.peer5}</li>
+                    
                     
                 </ul>
             </div>
