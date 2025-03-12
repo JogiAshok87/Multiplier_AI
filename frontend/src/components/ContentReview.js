@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState,useContext,useEffect } from "react";
 import Sidebar from "./Sidebar"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -12,6 +12,7 @@ import Header from './Header'
 export default function ContentReview() {
   
   const {promptResponse, setPromtResponse} = useContext(storeContext)
+  const [value, setValue] = useState("");
 
   const emailTemplate = (subject, bodyContent) => `
   <p><strong>Subject Line:</strong> ${subject}</p>
@@ -25,6 +26,12 @@ export default function ContentReview() {
   <p>[Your Position]</p>
   <p>[Your Contact Information]</p>
 `;
+useEffect(() => {
+  if (promptResponse) {
+    const { subject, body } = extractEmailParts(promptResponse);
+    setValue(emailTemplate(subject, body)); // **Update state dynamically**
+  }
+}, [promptResponse]);
 
 // Extract Subject & Body from the promptResponse
 const extractEmailParts = (response) => {
@@ -52,7 +59,7 @@ const extractEmailParts = (response) => {
 const { subject, body } = extractEmailParts(promptResponse);
 const formattedEmail = emailTemplate(subject, body);
 
-  const [value, setValue] = useState(formattedEmail);
+  
   
   const modules = {
     toolbar: [
