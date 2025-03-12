@@ -15,36 +15,36 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log({ username, password, remember });
-    try{
-      const response = await axios.post('http://127.0.0.1:5000/login',{
-        username:username,
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/login', {
+        username: username,
         password: password,
       });
-      if(response.status === 200){
+      if (response.status === 200) {
         // alert("Login Successfull!");
 
         toast.success("Login successful", {
           position: "top-right",
-          style:{
-            color:"black"
+          style: {
+            color: "black"
           }
         });
 
-        console.log("Token:",response.data.token);
-        localStorage.setItem("authToken",response.data.token);
+        console.log("Token:", response.data.token);
+        localStorage.setItem("authToken", response.data.token);
         login(response.data.token)
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate("/campaignPage")
-        },3000)
-      }else{
+        }, 3000)
+      } else {
         navigate("/login")
       }
-    }catch(error){
-      console.error("Login error:",error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Login failed! Please try again",{
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Login failed! Please try again", {
         position: "top-right",
-        style:{
-          color:"black"
+        style: {
+          color: "black"
         }
       })
     }
@@ -54,9 +54,9 @@ export default function Login() {
     <div className="flex  justify-center min-h-screen  bg-gray-100">
       <ToastContainer />
       <div className="w-1/2 flex flex-col mt-8">
-         < img src="/multiplier_logo.png" alt="" className="w-64"/>
-         
-         <p className="mt-60"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        < img src="/multiplier_logo.png" alt="" className="w-64" />
+
+        <p className="mt-60"> The "n=1" platform offers comprehensive content generation capabilities, particularly for healthcare. It provides tools to create diverse content types like blog posts, social media updates, email newsletters, and patient education materials. Users can leverage pre-designed templates for efficient creation and consistency. AI assistance enhances the workflow by suggesting topics, generating draft text, and optimizing content for specific platforms or audiences. This empowers users to efficiently produce high-quality, engaging content tailored to their needs.</p>
       </div>
       <div className="w-full max-w-md bg-white px-10 py-14  rounded-lg shadow-lg m-10 min-h-min">
         <h2 className="text-2xl font-bold text-center mb-2 text-[#800080]">Log in</h2>
