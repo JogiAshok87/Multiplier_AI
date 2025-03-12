@@ -260,14 +260,14 @@ export default function HCPDashboard() {
               </option>
             ))}
           </select>
-          <select name="experience" onChange={handleFilterChange} value={filters.experience} className="border rounded-md p-1 cursor-pointer">
+          <select name="experience" onChange={handleFilterChange} value={filters.experience} className="border rounded-md p-1 cursor-pointer w-40">
             <option value="">Experience</option>
             <option value="5">5+ years</option>
             <option value="10">10+ years</option>
             <option value="15">15+ years</option>
             <option value="20">20+ years</option>
           </select>
-          <select name="Status" onChange={handleFilterChange} value={filters.Status} className="border rounded-md p-1 cursor-pointer">
+          <select name="Status" onChange={handleFilterChange} value={filters.Status} className="border rounded-md p-1 cursor-pointer ">
             <option value="">Status</option>
             <option value="Unique">Unique</option>
             <option value="Duplicate">Duplicate</option>
