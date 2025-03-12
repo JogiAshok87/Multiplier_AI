@@ -23,7 +23,7 @@ export default function Login() {
       if(response.status === 200){
         // alert("Login Successfull!");
 
-        toast.success("User Loggined Successfully!", {
+        toast.success("Login successful", {
           position: "top-right",
           style:{
             color:"black"
