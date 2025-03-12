@@ -55,8 +55,8 @@ export default function Login() {
       <ToastContainer />
       <div className="w-1/2 flex flex-col mt-8">
         < img src="/multiplier_logo.png" alt="" className="w-64" />
-
-        <p className="mt-60"> The "n=1" platform offers comprehensive content generation capabilities, particularly for healthcare. It provides tools to create diverse content types like blog posts, social media updates, email newsletters, and patient education materials. Users can leverage pre-designed templates for efficient creation and consistency. AI assistance enhances the workflow by suggesting topics, generating draft text, and optimizing content for specific platforms or audiences. This empowers users to efficiently produce high-quality, engaging content tailored to their needs.</p>
+        <h1 className="text-4xl font-bold text-[#800080] mt-60 pb-2">N=1</h1>
+        <p > The "n=1" platform offers comprehensive content generation capabilities, particularly for healthcare. It provides tools to create diverse content types like blog posts, social media updates, email newsletters, and patient education materials. Users can leverage pre-designed templates for efficient creation and consistency. AI assistance enhances the workflow by suggesting topics, generating draft text, and optimizing content for specific platforms or audiences. This empowers users to efficiently produce high-quality, engaging content tailored to their needs.</p>
       </div>
       <div className="w-full max-w-md bg-white px-10 py-14  rounded-lg shadow-lg m-10 min-h-min">
         <h2 className="text-2xl font-bold text-center mb-2 text-[#800080]">Log in</h2>
